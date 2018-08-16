@@ -8,6 +8,7 @@ import hmac
 import urllib
 import hashlib
 import json
+import threading
 from os.path import basename
 from time import sleep
 from stem import Signal # to control tor server
@@ -86,6 +87,6 @@ def InjectPassword(session_config , current_line):
                 session_config['progress_status'] = ' [*] changing ip... '
                 print_progress(int(int(current_line/int(session_config['password_file_length'])*100)/100*ptotal),ptotal,session_config)
                 session_config['tor_controller'].signal(Signal.NEWNYM) # signal tor to change ip 
-                sleep(3) # lets wait to tor! a little!
+                sleep(2) # lets wait to tor! a little less! CC
             else:
                 session_config['proceedWith'] = True
