@@ -14,6 +14,8 @@ from .logger import *
 from .colors import Fore , Back , Style , init
 from .progress import print_progress
 from .instagram_bot import get_magic_cookie
+from Tkinter import *
+from tkMessageBox import *
 
 init(autoreset=True)
 
@@ -135,9 +137,13 @@ def loadSavefile(session_config):
                 writeSave(session_config , 1)
                 session_config['resume'] = False
 
+def answer():
+	showerror("Error", "File does not exist!")
+
 def getPasswordList(session_config):
     if(isfile(session_config['passwordFile'])):
         with open(session_config['passwordFile'] , encoding='utf-8', errors='ignore') as f:
             session_config['password_file_length'] = sum(1 for _ in f)
     else:
+    	Button(text='Error', command=Error).pack(fill=x)
         report_err(app_error['no_file_p']) # report and exit if password file does not exist!
